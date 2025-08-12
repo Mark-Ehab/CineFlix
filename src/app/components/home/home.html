@@ -17,17 +17,9 @@
           <div class="">
             <span class="font-bold me-5"
               ><i class="text-blue-500 fa-solid fa-film"></i>
-              {{
-                parseGenreNames(
-                  listOfOfficialGenres,
-                  trendingShows[0].genre_ids
-                )[0]
-              }}
-              @if(trendingShows[0].media_type === "movie"){/{{
-                parseGenreNames(
-                  listOfOfficialGenres,
-                  trendingShows[0].genre_ids
-                )[1]
+              {{ genreNameList[0] }}
+              @if(trendingShows[0].media_type === "movie"){ /{{
+                genreNameList[1]
               }}}</span
             >
             <span class="font-bold me-5"

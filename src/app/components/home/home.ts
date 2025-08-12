@@ -22,6 +22,7 @@ listOfOfficialGenres:IGenre[] = [{} as IGenre] ;
 trendingShowsSubscription!:Subscription;
 listOfOfficialGenresSubscription!:Subscription;
 imgBase:string="https://image.tmdb.org/t/p/w500";
+genreNameList:string[]=[];
 
 
 /* Methods */
@@ -29,7 +30,7 @@ getTrendingShowsData():void
 {
   this.trendingShowsSubscription = this.moviesAPI.getTrendingShows().subscribe(
     {
-      next:(result)=>{this.trendingShows = this.shuffleList<IShow>(result.results); console.log(this.trendingShows)},
+      next:(result)=> this.trendingShows = this.shuffleList<IShow>(result.results),
       error:(err)=>console.log(`%c ${err.message}`,"color:red"),
     }
   )
@@ -38,7 +39,11 @@ getListOfOfficialGenresData():void
 {
   this.listOfOfficialGenresSubscription = this.moviesAPI.getListOfOfficialGenres().subscribe(
     {
-      next:(result)=>{this.listOfOfficialGenres = result.genres; console.log(this.listOfOfficialGenres)},
+      next:(result)=>
+        {
+          this.listOfOfficialGenres = result.genres; 
+          this.genreNameList = this.parseGenreNames(this.listOfOfficialGenres,this.trendingShows[0].genre_ids);
+        },
       error:(err)=>console.log(`%c ${err.message}`,"color:red"),
     }
   )
