@@ -1,0 +1,18 @@
+<div
+  class="grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+>
+  @for (trendingShow of trendingShows.slice(0,7); track trendingShow.id) {
+  <moviecard
+    [title]="trendingShow.name || trendingShow.title"
+    [releaseYear]="
+      trendingShow?.release_date
+        ? trendingShow.release_date.slice(0, 4)
+        : trendingShow.first_air_date.slice(0, 4)
+    "
+    [genreIdList]="trendingShow.genre_ids.slice(0, 2)"
+    [genreList]="genreList"
+    [rate]="trendingShow.vote_average"
+    [posterSrc]="imgBase + trendingShow.poster_path"
+  ></moviecard
+  >}
+</div>

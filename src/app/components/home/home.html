@@ -1,0 +1,59 @@
+<section id="home">
+  <div
+    class="mx-5 sm:mx-10 md:mx-[calc((100%-40rem)/2)] lg:mx-[calc((100%-48rem)/2)] xl:mx-[calc((100%-64rem)/2)]"
+  >
+    <div class="pt-10 pb-20 h-full">
+      <figure
+        class="size-full rounded-3xl overflow-hidden max-h-[26.25rem] h-[25.625rem] shadow-[0_0_25px_rgba(0,0,0,0.5)] shadow-blue-500 group relative"
+      >
+        <img
+          class="size-full object-cover object-center group-hover:scale-110 duration-500 transition-all"
+          [src]="imgBase + trendingShows[0].poster_path"
+          [alt]="trendingShows[0].title"
+        />
+        <div
+          class="overlay bg-black/20 absolute top-0 size-full text-white p-15 flex flex-col justify-end items-start gap-5"
+        >
+          <div class="">
+            <span class="font-bold me-5"
+              ><i class="text-blue-500 fa-solid fa-film"></i>
+              {{
+                parseGenreNames(
+                  listOfOfficialGenres,
+                  trendingShows[0].genre_ids
+                )[0]
+              }}
+              @if(trendingShows[0].media_type === "movie"){/{{
+                parseGenreNames(
+                  listOfOfficialGenres,
+                  trendingShows[0].genre_ids
+                )[1]
+              }}}</span
+            >
+            <span class="font-bold me-5"
+              ><i class="text-blue-500 fa-solid fa-calendar"></i>
+              {{
+                trendingShows[0].release_date
+                  ? trendingShows[0].release_date.slice(0, 4)
+                  : trendingShows[0].first_air_date.slice(0, 4)
+              }}</span
+            >
+            @if(trendingShows[0].media_type === "movie") {
+            <span class="font-bold me-5"
+              ><i class="text-blue-500 fa-solid fa-clock"></i> 2hr 11m</span
+            >
+            }
+            <span class="font-bold bg-blue-500 p-2 rounded-xl">4K</span>
+          </div>
+          <h1 class="text-4xl font-extrabold">
+            {{
+              trendingShows[0].title
+                ? trendingShows[0].title
+                : trendingShows[0].name
+            }}
+          </h1>
+        </div>
+      </figure>
+    </div>
+  </div>
+</section>

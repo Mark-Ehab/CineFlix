@@ -1,0 +1,22 @@
+<section class="text-white">
+  <div
+    class="mx-5 sm:mx-10 md:mx-[calc((100%-40rem)/2)] lg:mx-[calc((100%-48rem)/2)] xl:mx-[calc((100%-64rem)/2)]"
+  >
+    <div class="pt-6 pb-20">
+      <h2 class="font-bold mb-4 p-3 text-3xl">All Products :</h2>
+      <div class="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        @for (product of products; track product.id) {
+        <productcard
+          [title]="product.title"
+          [category]="product.category"
+          [description]="product.description"
+          [imgSrc]="product.image"
+          [price]="product.price"
+          [count]="product.rating.count"
+          [rate]="product.rating.rate"
+        ></productcard>
+        }
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,43 @@
+<div class="card text-white h-full w-full group/card cursor-pointer">
+  <figure
+    class="card-img rounded-2xl overflow-hidden relative shadow-[0_0_10px_rgba(0,0,0,0.5)] shadow-blue-500"
+  >
+    <img
+      [src]="posterSrc"
+      [alt]="title"
+      class="group-hover/card:blur-[.1563rem] group-hover/card:scale-120 transition-all duration-500 w-full min-h-[43.1875rem] sm:min-h-[30rem] md:min-h-[18.75rem] lg:min-h-[16.5938rem] xl:min-h-[17.6999rem]"
+    />
+    <div
+      class="overlay top-0 p-3.5 absolute size-full hidden group-hover/card:flex group-hover/card:flex-col group-hover/card:items-center"
+    >
+      <div class="flex justify-between w-full">
+        <span class="block bg-gray-700 py-[.0781rem] px-2 rounded-xl"
+          ><i
+            class="fa-regular fa-bookmark text-blue-500 hover:text-yellow-400 duration-300 transition-colors"
+          ></i
+        ></span>
+        <span
+          class="flex items-center font-bold bg-gray-600 rounded-lg px-2 text-[.8125rem] leading-3"
+          ><i class="fa-regular fa-star text-blue-500 me-[.3125rem]"></i
+          >{{ truncateRate(rate) }}</span
+        >
+      </div>
+      <div class="h-full flex justify-center items-center">
+        <i class="fa-regular fa-play-circle fa-3x text-white/50"></i>
+      </div>
+    </div>
+  </figure>
+  <article class="card-body p-1 h-full">
+    <h3
+      class="text-[1.0625rem] font-bold group-hover/card:text-blue-500 duration-500 transition-colors mb-[.1875rem]"
+    >
+      {{ title }}
+    </h3>
+    <div class="flex justify-between">
+      <span class="text-[.75rem]"
+        >{{ parseGenreNames(genreList, genreIdList)[0] }}
+      </span>
+      <span class="text-[.75rem]">{{ releaseYear }}</span>
+    </div>
+  </article>
+</div>
