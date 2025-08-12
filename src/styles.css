@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Import TailwindCSS*/
+@import "tailwindcss";
+
+/* Import Fontawesone */
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
+/* Import Flowbite */
+@import "flowbite/src/themes/default";
