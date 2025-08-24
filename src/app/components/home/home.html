@@ -2,50 +2,163 @@
   <div
     class="mx-5 sm:mx-10 md:mx-[calc((100%-40rem)/2)] lg:mx-[calc((100%-48rem)/2)] xl:mx-[calc((100%-64rem)/2)]"
   >
-    <div class="pt-10 pb-20 h-full">
-      <figure
-        class="size-full rounded-3xl overflow-hidden max-h-[26.25rem] h-[25.625rem] shadow-[0_0_25px_rgba(0,0,0,0.5)] shadow-blue-500 group relative"
+    @if (isLoaded) {
+    <div
+      id="default-carousel"
+      class="relative w-full pt-10 pb-20 h-full z-0"
+      data-carousel="slide"
+    >
+      <!-- Carousel wrapper -->
+      <div
+        class="relative h-56 overflow-hidden rounded-3xl md:h-96 shadow-[0_0_25px_rgba(0,0,0,0.5)] shadow-blue-500 group"
       >
-        <img
-          class="size-full object-cover object-center group-hover:scale-110 duration-500 transition-all"
-          [src]="imgBase + trendingShows[0].poster_path"
-          [alt]="trendingShows[0].title"
-        />
-        <div
-          class="overlay bg-black/20 absolute top-0 size-full text-white p-15 flex flex-col justify-end items-start gap-5"
+        <figure
+          class="size-full rounded-3xl overflow-hidden max-h-[26.25rem] h-[26.25rem] group relative hidden duration-300"
+          data-carousel-item="active"
         >
-          <div class="">
-            <span class="font-bold me-5"
-              ><i class="text-blue-500 fa-solid fa-film"></i>
-              {{ genreNameList[0] }}
-              @if(trendingShows[0].media_type === "movie"){ /{{
-                genreNameList[1]
-              }}}</span
-            >
-            <span class="font-bold me-5"
-              ><i class="text-blue-500 fa-solid fa-calendar"></i>
+          <img
+            class="size-full object-fit object-center group-hover:scale-110 duration-500 transition-all"
+            [src]="imgBase + trendingShows[0].poster_path"
+            [alt]="trendingShows[0].title || trendingShows[0].name"
+          />
+          <div
+            class="overlay bg-black/20 absolute top-0 size-full text-white p-15 flex flex-col justify-end items-start gap-5"
+          >
+            <div>
+              @if(trendingShows[0].genre_names){
+              <span class="font-bold me-5"
+                ><i class="text-blue-500 fa-solid fa-film"></i>
+                {{ trendingShows[0].genre_names[0] }}
+                @if(trendingShows[0].media_type === "movie") { @for(genreName of
+                trendingShows[0].genre_names.slice(1,3); track $index){ /{{
+                  genreName
+                }}
+                }}</span
+              >}
+              <span class="font-bold me-5"
+                ><i class="text-blue-500 fa-solid fa-calendar"></i>
+                {{
+                  trendingShows[0].release_date
+                    ? trendingShows[0].release_date.slice(0, 4)
+                    : trendingShows[0].first_air_date.slice(0, 4)
+                }}</span
+              >
+              @if(trendingShows[0].media_type === "movie") {
+              <span class="font-bold me-5"
+                ><i class="text-blue-500 fa-solid fa-clock"></i> 2hr 11m</span
+              >
+              }
+              <span class="font-bold bg-blue-500 p-2 rounded-xl">4K</span>
+            </div>
+            <h1 class="text-4xl font-extrabold">
               {{
-                trendingShows[0].release_date
-                  ? trendingShows[0].release_date.slice(0, 4)
-                  : trendingShows[0].first_air_date.slice(0, 4)
-              }}</span
-            >
-            @if(trendingShows[0].media_type === "movie") {
-            <span class="font-bold me-5"
-              ><i class="text-blue-500 fa-solid fa-clock"></i> 2hr 11m</span
-            >
-            }
-            <span class="font-bold bg-blue-500 p-2 rounded-xl">4K</span>
+                trendingShows[0].title
+                  ? trendingShows[0].title
+                  : trendingShows[0].name
+              }}
+            </h1>
           </div>
-          <h1 class="text-4xl font-extrabold">
-            {{
-              trendingShows[0].title
-                ? trendingShows[0].title
-                : trendingShows[0].name
-            }}
-          </h1>
-        </div>
-      </figure>
+        </figure>
+        @for (show of trendingShows.slice(1); track show.id) {
+        <figure
+          class="size-full rounded-3xl overflow-hidden max-h-[26.25rem] h-[26.25rem] group relative hidden duration-300"
+          data-carousel-item
+        >
+          <img
+            class="size-full object-fit object-center group-hover:scale-110 duration-500 transition-all"
+            [src]="imgBase + show.poster_path"
+            [alt]="show.title || show.name"
+          />
+          <div
+            class="overlay bg-black/20 absolute top-0 size-full text-white p-15 flex flex-col justify-end items-start gap-5"
+          >
+            <div>
+              @if(show.genre_names){
+              <span class="font-bold me-5"
+                ><i class="text-blue-500 fa-solid fa-film"></i>
+                {{ show.genre_names[0] }}
+                @if(show.media_type === "movie") { @for(genreName of
+                show.genre_names.slice(1,3); track $index){ /{{
+                  genreName
+                }}
+                }}</span
+              >}
+              <span class="font-bold me-5"
+                ><i class="text-blue-500 fa-solid fa-calendar"></i>
+                {{
+                  show.release_date
+                    ? show.release_date.slice(0, 4)
+                    : show.first_air_date.slice(0, 4)
+                }}</span
+              >
+              @if(show.media_type === "movie") {
+              <span class="font-bold me-5"
+                ><i class="text-blue-500 fa-solid fa-clock"></i> 2hr 11m</span
+              >
+              }
+              <span class="font-bold bg-blue-500 p-2 rounded-xl">4K</span>
+            </div>
+            <h1 class="text-4xl font-extrabold">
+              {{ show.title ? show.title : show.name }}
+            </h1>
+          </div>
+        </figure>
+        }
+      </div>
+      <!-- Slider controls -->
+      <button
+        type="button"
+        class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+        data-carousel-prev
+      >
+        <span
+          class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
+        >
+          <svg
+            class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 6 10"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 1 1 5l4 4"
+            />
+          </svg>
+          <span class="sr-only">Previous</span>
+        </span>
+      </button>
+      <button
+        type="button"
+        class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+        data-carousel-next
+      >
+        <span
+          class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
+        >
+          <svg
+            class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 6 10"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m1 9 4-4-4-4"
+            />
+          </svg>
+          <span class="sr-only">Next</span>
+        </span>
+      </button>
     </div>
+    }
   </div>
 </section>

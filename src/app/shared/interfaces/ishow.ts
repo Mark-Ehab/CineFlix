@@ -10,6 +10,7 @@ export interface IShow {
   media_type: string;
   original_language: string;
   genre_ids: number[];
+  genre_names: string[];
   popularity: number;
   release_date: string;
   first_air_date: string;

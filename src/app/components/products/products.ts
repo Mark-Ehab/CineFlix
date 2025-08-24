@@ -15,7 +15,7 @@ export class Products implements OnInit, OnDestroy {
   private readonly productsAPI = inject(ProductsAPI);
 
   /* Properties */
-  products: IProduct[] = [];
+  products: IProduct[] = [] as IProduct[];
   private productsSubscription!: Subscription;
 
   /* Methods */
